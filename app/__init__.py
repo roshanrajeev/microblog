@@ -51,14 +51,3 @@ if not app.debug:
         app.logger.addHandler(mail_handler)
 
 
-
-
-
-
-# from flask_mail import Message
-# from app import mail
-# msg = Message('test subject', sender=app.config['ADMINS'][0], recipients=['roshanrjv.27@gmail.com'])
-# msg.body = 'text body'
-# msg.html = '<h1>HTML body</h1>'
-# with app.app_context():
-#     mail.send(msg)
