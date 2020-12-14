@@ -30,6 +30,7 @@ class User(UserMixin, db.Model):
     posts=db.relationship("Post", backref="author", lazy="dynamic")
     about_me=db.Column(db.String(140))
     last_seen=db.Column(db.DateTime, default=datetime.utcnow)
+    location=db.Column(db.String(120))
 
     followed=db.relationship('User', 
         secondary=followers, 

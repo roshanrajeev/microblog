@@ -65,7 +65,9 @@
                   </div>
 
 
-
+                {% if user.location %}
+                  <p><i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;&nbsp;{{ user.location }}</p>
+                {% endif %}
 
                 {% if user == current_user %}
                 <p><a href="{{ url_for('edit_profile') }}" class="btn btn-info" role="button">Edit your profile</a></p>
