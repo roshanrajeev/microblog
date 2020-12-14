@@ -51,3 +51,6 @@ if not app.debug:
         app.logger.addHandler(mail_handler)
 
 
+@app.context_processor
+def global_variables():
+    return dict(enumerate=enumerate)

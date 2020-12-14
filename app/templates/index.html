@@ -32,16 +32,62 @@
             <div class="card text-left overflow-hidden" style="border: none;">
                 <img src="{{current_user.avatar(100)}}" alt="Profile Icon" class="card-img-top img-fluid mt-4" style="max-width: 250px;">
                 <div class="card-body py-2 px-0">
-                    <h4 class="card-title font-weight-bold">{{current_user.username}}</h4>
+                    <h4 class="card-title font-weight-bold">@{{current_user.username}}</h4>
                     {% if current_user.about_me %}
                     <p style="font-size: 15px;">
                         {{current_user.about_me}}
                     </p>
                     {% endif %}
                     <p>
-                        <i class="far fa-user" style="font-size: 13px;"></i>&nbsp;&nbsp;<span style="font-size: 14px;" class="font-weight-bold">{{current_user.followers.count()}}</span> <span style="font-size: 13px;">Followers</span> 
-                        . <span style="font-size: 14px;" class="font-weight-bold">{{current_user.followed.count()}}</span> <span style="font-size: 13px;">Followed</span>
+                        <i class="far fa-user" style="font-size: 13px;"></i>&nbsp;&nbsp;
+                        <span style="font-size: 14px;" class="font-weight-bold">
+                            {{current_user.followers.count()}}
+                        </span> 
+                        <span style="font-size: 13px; cursor: pointer;" data-toggle="modal" data-target="#followersModel">
+                            Followers
+                        </span> 
+                        . 
+                        <span style="font-size: 14px;" class="font-weight-bold">
+                            {{current_user.followed.count()}}
+                        </span> 
+                        <span style="font-size: 13px; cursor: pointer;" data-toggle="modal" data-target="#followedModel">
+                            Followed
+                        </span>
                     </p>
+                    <div class="modal fade" id="followersModel" tabindex="-1" aria-labelledby="followersModelLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                          <div class="modal-content border-0">
+                            <div class="modal-header bg-dark text-white">
+                              <h5 class="modal-title" id="followersModelLabel">Followers</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                              {% for i, user in enumerate(current_user.followers) %}
+                                <a class="d-block mb-2 text-secondary" href="{{ url_for('user', username=user.username) }}">{{ i+1 }}. {{user.username}}</a>
+                              {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal fade" id="followedModel" tabindex="-1" aria-labelledby="followedModelLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                          <div class="modal-content border-0">
+                            <div class="modal-header bg-dark text-white">
+                              <h5 class="modal-title" id="followedModelLabel">Follows</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="color: white;">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                {% for i, user in enumerate(current_user.followed) %}
+                                    <a class="d-block mb-2 text-secondary" href="{{ url_for('user', username=user.username) }}">{{ i+1 }}. {{user.username}}</a>
+                                {% endfor %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                 </div>
             </div>
         </div>
