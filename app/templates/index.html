@@ -2,22 +2,49 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block app_content %}
-    <h1>Hi, {{ current_user.username }}!</h1>
-    {% if form %}
-    {{ wtf.quick_form(form) }}
-    <br>
-    {% endif %}
-    {% for post in posts %}
-        {% include '_post.html' %}
-    {% endfor %}
-    <nav aria-label="...">
-        <ul class="pagination justify-content-between">
-          <li class="page-item {% if not prev_url %} disabled{% endif %}">
-            <a class="page-link" href="{{ prev_url or '#' }}">Newer posts</a>
-          </li>
-          <li class="page-item {% if not next_url %} disabled {% endif %}">
-            <a class="page-link" href="{{ next_url or '#' }}">Older posts</a>
-          </li>
-        </ul>
-      </nav>
+    <div class="row mb-4">
+        <div class="col-md-8 col-12 order-1 order-md-0">
+            <h1>Hi, {{ current_user.username }}!</h1>
+            {% if form %}
+            <form action="" method="POST">
+                {{ form.csrf_token }}
+                {{ wtf.form_field(form.post, rows=3) }}
+                {{ wtf.form_field(form.submit) }}
+            </form>
+            <br>
+            {% endif %}
+            {% for post in posts %}
+                {% include '_post.html' %}
+            {% endfor %}
+            <nav aria-label="...">
+                <ul class="pagination justify-content-between">
+                <li class="page-item {% if not prev_url %} disabled{% endif %}">
+                    <a class="page-link" href="{{ prev_url or '#' }}">Newer posts</a>
+                </li>
+                <li class="page-item {% if not next_url %} disabled {% endif %}">
+                    <a class="page-link" href="{{ next_url or '#' }}">Older posts</a>
+                </li>
+                </ul>
+            </nav>
+        </div>
+        {% if form %}
+        <div class="col-md-3 col-12 order-0 order-md-1 offset-md-1">
+            <div class="card text-left overflow-hidden" style="border: none;">
+                <img src="{{current_user.avatar(100)}}" alt="Profile Icon" class="card-img-top img-fluid mt-4" style="max-width: 250px;">
+                <div class="card-body py-2 px-0">
+                    <h4 class="card-title font-weight-bold">{{current_user.username}}</h4>
+                    {% if current_user.about_me %}
+                    <p style="font-size: 15px;">
+                        {{current_user.about_me}}
+                    </p>
+                    {% endif %}
+                    <p>
+                        <i class="far fa-user" style="font-size: 13px;"></i>&nbsp;&nbsp;<span style="font-size: 14px;" class="font-weight-bold">{{current_user.followers.count()}}</span> <span style="font-size: 13px;">Followers</span> 
+                        . <span style="font-size: 14px;" class="font-weight-bold">{{current_user.followed.count()}}</span> <span style="font-size: 13px;">Followed</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
 {% endblock %}
