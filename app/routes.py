@@ -83,8 +83,9 @@ def user(username):
     next_url = url_for('user', username=user.username, page=posts.next_num) if posts.has_next else None
     prev_url = url_for('user', username=user.username, page=posts.prev_num) if posts.has_prev else None
     form = EmptyForm()
+    post_del_form = EmptyForm()
     return render_template('user.html', user=user, posts=posts.items, 
-                            next_url=next_url, prev_url=prev_url, form=form)
+                            next_url=next_url, prev_url=prev_url, form=form, post_del_form=post_del_form)
 
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
@@ -183,3 +184,31 @@ def reset_password(token):
         flash('Your password has been reset.')
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+
+@app.route('/delete/post/<post_id>', methods=['GET', 'POST'])
+@login_required
+def delete_post(post_id):
+    # form = EmptyForm()
+    # post = Post.query.get(post_id)
+    # if not post:
+    #     return redirect(url_for('index'))
+    # user = post.author
+    # if not user or user != current_user:
+    #     return redirect(url_for('index'))
+    # db.session.delete(post)
+    # db.session.commit()
+    # return redirect(url_for('user', username=current_user.username))
+
+    form = EmptyForm()
+    if form.validate_on_submit():
+        post = Post.query.get(post_id)
+        if not post:
+            return redirect(url_for('index'))
+        user = post.author
+        if not user or user != current_user:
+            return redirect(url_for('index'))
+        db.session.delete(post)
+        db.session.commit()
+        return redirect(url_for('user', username=current_user.username))
+    return redirect(url_for('index'))
