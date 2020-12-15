@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, jsonify
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm, SendMessageForm
 from app.models import User, Post, Message
@@ -224,8 +224,15 @@ def notification():
     #     {"content": "first msg"},
     #     {"content": "second msg"},
     # ]
-    messages = current_user.received_messages
-    return render_template('notifications.html', messages=messages)
+    return render_template('notifications.html')
+
+@app.route('/load-notifications')
+@login_required
+def load_notifications():
+    page = request.args.get('page', 1, type=int)
+    messages = current_user.get_received_messages().paginate(page, app.config['MESSAGES_PER_PAGE'], False)
+    print(messages.items)
+    return jsonify({"messages": "hello"})
 
 
 @app.route('/message/<recipient>', methods=['GET', 'POST'])

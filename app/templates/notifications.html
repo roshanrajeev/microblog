@@ -2,7 +2,53 @@
 
 {% block app_content %}
     <h1 class="mb-4">Notifications</h1>
-    {% for message in messages %}
+    <!-- {% for message in messages %}
     {% include '_notification.html' %}
     {% endfor %}
+    {% if has_next %}
+    <button id="load-messages"class="btn btn-warning" role="button">
+        Older Messages
+    </button>
+    {% endif %} -->
+    <table class="notification-table table table-hover">
+        <tr>
+            <td>
+                <span style="font-size:13px">From @caity</span><br>
+                hello there
+            </td>
+            <td class="text-right"style="font-size:13px; transform: translateY(15px)">24.02.015 Dec 15</td>
+        </tr>
+    </table>
+    <button id="load-messages"class="btn btn-warning" role="button">
+        Older Messages
+    </button>
+{% endblock %}
+
+{% block app_scripts %}
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const btn = document.querySelector('#load-messages')
+            btn.addEventListener('click', handlePageLoad)
+
+        })
+        function handlePageLoad(e){
+            let notifications = document.querySelectorAll('.notification-table')
+            /*if(notifications.length == 0){
+                return
+            }
+            let notificationClone = notifications[0].cloneNode(true)
+            console.log(notificationClone)*/
+            newNotifications = getNewNotifications()
+        }
+        function getNewNotifications(){
+            fetch('/load-notifications', {
+                method: 'GET',
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data => console.log(data))
+        }
+    </script>
 {% endblock %}

@@ -43,6 +43,13 @@ class User(UserMixin, db.Model):
     send_messages = db.relationship('Message', backref='sender', lazy=True, foreign_keys='Message.sender_id')
     received_messages = db.relationship('Message', backref='recipient', lazy=True, foreign_keys='Message.recipient_id')
 
+    def get_received_messages(self):
+        return Message.query.join(
+                User, (User.id == Message.recipient_id)).filter(
+                Message.recipient_id==self.id).order_by(
+                Message.timestamp.desc())
+
+
     def __repr__(self):
         return "<User {}>".format(self.username)
 
@@ -73,6 +80,10 @@ class User(UserMixin, db.Model):
                 followers.c.follower_id == self.id)
         own = Post.query.filter_by(user_id=self.id)
         return followed.union(own).order_by(Post.timestamp.desc())
+
+
+    # User.query.join(Message, (Message.recipient_id == User.id))
+    # Message.query.join(User, (Message.recipient_id == User.id))
 
     def get_reset_password_token(self, expires_in=600):
         return jwt.encode(
