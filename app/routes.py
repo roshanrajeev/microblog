@@ -220,11 +220,6 @@ def delete_post(post_id):
 @app.route('/notifications')
 @login_required
 def notification():
-    # messages=[
-    #     {"content": "hey there"},
-    #     {"content": "first msg"},
-    #     {"content": "second msg"},
-    # ]
     return render_template('notifications.html')
 
 @app.route('/load-notifications')
@@ -232,7 +227,6 @@ def notification():
 def load_notifications():
     page = request.args.get('page', 1, type=int)
     messages = current_user.get_received_messages().paginate(page, app.config['MESSAGES_PER_PAGE'], False)
-
     message_schema = MessageSchema(many=True)
     result = message_schema.dump(messages.items)
     return jsonify({"messages": result, "hasNext": messages.has_next})
