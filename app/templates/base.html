@@ -7,6 +7,8 @@
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+    {% block app_styles %}
+    {% endblock %}
 {% endblock %}
 
 {% block navbar %}
@@ -66,4 +68,6 @@
     {{ super() }}
     {{ moment.include_moment() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='js/scripts.js') }}">
+    {% block app_scripts %}
+    {% endblock %}
 {% endblock %}

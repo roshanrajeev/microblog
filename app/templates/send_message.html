@@ -1,6 +1,25 @@
 {% extends 'base.html' %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
+{% block app_styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='vendor/emojione/emojionearea.min.css') }}">
+{% endblock %}
+
 {% block app_content %}
-    {{ wtf.quick_form(form) }}
+    <form action="{{ url_for('send_message', recipient=recipient) }}" method="post">
+        {{ form.csrf_token }}
+        {{ wtf.form_field(form.content, rows=3, id="send_message_content_field") }}
+        {{ wtf.form_field(form.submit) }}
+    </form>
+{% endblock %}
+
+{% block app_scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename='vendor/emojione/emojionearea.min.js') }}"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("#send_message_content_field").emojioneArea({
+        pickerPosition: "bottom",
+    });
+  });
+</script>
 {% endblock %}

@@ -188,7 +188,7 @@ def reset_password(token):
     return render_template('reset_password.html', form=form)
 
 
-@app.route('/delete/post/<post_id>', methods=['GET', 'POST'])
+@app.route('/delete/post/<post_id>', methods=['POST'])
 @login_required
 def delete_post(post_id):
     # form = EmptyForm()
@@ -228,15 +228,16 @@ def notification():
     return render_template('notifications.html', messages=messages)
 
 
-@app.route('/send-message/<recipient>', methods=['GET', 'POST'])
+@app.route('/message/<recipient>', methods=['GET', 'POST'])
 @login_required
 def send_message(recipient):
     form = SendMessageForm()
     if form.validate_on_submit():
         recipient = User.query.filter_by(username=recipient).first()
-        msg = Message(content=form.content.data, sender=current_user, recipient=recipient)
+        msg = Message(content=form.content.data, sender=current_user, recipient=recipient.username)
         db.session.add(msg)
         db.session.commit()
         flash("Your message has been send")
         return redirect(url_for('send_message', recipient=recipient.username))
-    return render_template('send_message.html', form=form)
+    return render_template('send_message.html', form=form, recipient=recipient)
+

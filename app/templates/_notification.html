@@ -1,6 +1,9 @@
 <table class="table table-hover">
     <tr>
-        <td>{{message.content}}</td>
-        <td class="text-right"style="font-size:13px">From @{{message.sender.username}} {{ moment(message.timestamp).fromNow() }}</td>
+        <td>
+            <span style="font-size:13px">From @{{message.sender.username}}</span><br>
+            {{message.content}}
+        </td>
+        <td class="text-right"style="font-size:13px; transform: translateY(15px)">{{ moment(message.timestamp).fromNow() }}</td>
     </tr>
 </table>
