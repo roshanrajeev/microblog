@@ -79,12 +79,16 @@
                     </form>
                 </p>
                 {% else %}
-                <p>
-                    <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
-                        {{ form.hidden_tag() }}
-                        {{ form.submit(value='Unfollow', class_='btn btn-danger') }}
-                    </form>
-                </p>
+                <div class="d-flex">
+                  <form action="{{ url_for('unfollow', username=user.username) }}" method="post" class="mr-2">
+                    {{ form.hidden_tag() }}
+                    {{ form.submit(value='Unfollow', class_='btn btn-danger') }}
+                  </form>
+                  <form action="{{ url_for('send_message', recipient=user.username) }}", method="post">
+                    {{ form.hidden_tag() }}
+                    {{ form.submit(value='Message', class_='btn btn-info') }}
+                  </form>
+                </div>
                 {% endif %}
             </td>
         </tr>

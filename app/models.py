@@ -31,7 +31,7 @@ class User(UserMixin, db.Model):
     about_me=db.Column(db.String(140))
     last_seen=db.Column(db.DateTime, default=datetime.utcnow)
     location=db.Column(db.String(120))
-
+    
     followed=db.relationship('User', 
         secondary=followers, 
         primaryjoin=(followers.c.follower_id==id), 
@@ -39,6 +39,9 @@ class User(UserMixin, db.Model):
         backref=db.backref('followers', lazy='dynamic'), 
         lazy='dynamic'
     )
+
+    send_messages = db.relationship('Message', backref='sender', lazy=True, foreign_keys='Message.sender_id')
+    received_messages = db.relationship('Message', backref='recipient', lazy=True, foreign_keys='Message.recipient_id')
 
     def __repr__(self):
         return "<User {}>".format(self.username)
@@ -86,6 +89,15 @@ class User(UserMixin, db.Model):
         except:
             return
         return User.query.get(id)
+
+
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(120), nullable=False)
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+    seen_time = db.Column(db.DateTime)
 
 
 @login.user_loader
