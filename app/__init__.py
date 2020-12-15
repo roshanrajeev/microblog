@@ -9,6 +9,7 @@ from logging.handlers import RotatingFileHandler, SMTPHandler
 from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
+from flask_marshmallow import Marshmallow
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -19,8 +20,10 @@ login.login_view = 'login'
 mail = Mail(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
+ma = Marshmallow(app)
 
-from app import routes, models, errors
+
+from app import routes, models, errors, schema
 
 
 if not app.debug:

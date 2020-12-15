@@ -6,6 +6,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from datetime import datetime
 from app.emails import send_password_reset_email
+from app.schema import MessageSchema
 
 @app.before_request
 def before_request():
@@ -231,8 +232,10 @@ def notification():
 def load_notifications():
     page = request.args.get('page', 1, type=int)
     messages = current_user.get_received_messages().paginate(page, app.config['MESSAGES_PER_PAGE'], False)
-    print(messages.items)
-    return jsonify({"messages": "hello"})
+
+    message_schema = MessageSchema(many=True)
+    result = message_schema.dump(messages.items)
+    return jsonify({"messages": result, "hasNext": messages.has_next})
 
 
 @app.route('/message/<recipient>', methods=['GET', 'POST'])
