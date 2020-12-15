@@ -231,13 +231,20 @@ def notification():
 @app.route('/message/<recipient>', methods=['GET', 'POST'])
 @login_required
 def send_message(recipient):
+    user = User.query.filter_by(username=recipient).first()
+    if not user or not current_user.is_following(user):
+        return redirect(url_for('index'))
+    form = SendMessageForm()
+    return render_template('send_message.html', form=form, recipient=recipient)
+
+
+@app.route('/send-message/<recipient>', methods=['POST'])
+def send_message_action(recipient):
     form = SendMessageForm()
     if form.validate_on_submit():
         recipient = User.query.filter_by(username=recipient).first()
-        msg = Message(content=form.content.data, sender=current_user, recipient=recipient.username)
+        msg = Message(content=form.content.data, sender=current_user, recipient=recipient)
         db.session.add(msg)
         db.session.commit()
         flash("Your message has been send")
         return redirect(url_for('send_message', recipient=recipient.username))
-    return render_template('send_message.html', form=form, recipient=recipient)
-

@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block app_content %}
-    <form action="{{ url_for('send_message', recipient=recipient) }}" method="post">
+    <form action="{{ url_for('send_message_action', recipient=recipient) }}" method="post">
         {{ form.csrf_token }}
         {{ wtf.form_field(form.content, rows=3, id="send_message_content_field") }}
         {{ wtf.form_field(form.submit) }}

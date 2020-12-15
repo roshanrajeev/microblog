@@ -84,10 +84,7 @@
                     {{ form.hidden_tag() }}
                     {{ form.submit(value='Unfollow', class_='btn btn-danger') }}
                   </form>
-                  <form action="{{ url_for('send_message', recipient=user.username) }}", method="post">
-                    {{ form.hidden_tag() }}
-                    {{ form.submit(value='Message', class_='btn btn-info') }}
-                  </form>
+                  <a class="btn btn-info" role="button" href="{{ url_for('send_message', recipient=user.username) }}">Message</a>
                 </div>
                 {% endif %}
             </td>
