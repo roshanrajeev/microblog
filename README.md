@@ -1,7 +1,7 @@
   <p align="center">
     <h2 align="center">Flask Microblog Application</h2>
     <p align="center">
-      A microblog to speak your mind
+      Hear what people have to say
       <br>
       <a href="https://roshan-flask-microblog.herokuapp.com/">View App</a>
     </p>
