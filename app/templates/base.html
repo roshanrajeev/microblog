@@ -54,7 +54,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container pt-4">
+<div class="container pt-4" id="notification-alert-container" style="position: relative;">
     {% with messages = get_flashed_messages() %}
     {% if messages %}
         {% for message in messages %}
@@ -72,31 +72,7 @@
     {{ moment.include_moment() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='js/scripts.js') }}">
     <script src="https://cdn.jsdelivr.net/npm/socket.io-client@3.0.1/dist/socket.io.min.js"></script>
-    <script>
-        window.addEventListener('DOMContentLoaded',() => {
-            const socket = io.connect('http://localhost:5000')
-            socket.on('new messages', function(msg) {
-                handleNotification()
-            })
-        })
-        function handleNotification(){
-            const item = document.querySelector('#nav-item-notification')
-            if(!item.children[0].classList.contains('nav-item-notification-icon')){
-                const span = document.createElement('span')
-                span.className='nav-item-notification-icon'
-                span.style.cssText=`
-                    background-color: orange; 
-                    position:absolute;top: 50%;
-                    transform: translate(0, -51%);
-                    left: -8px; 
-                    width: 8px; 
-                    height: 8px; 
-                    border-radius: 50%;
-                `
-                item.insertBefore(span, item[0])
-            }
-        }
-    </script>
+    <script src="{{ url_for('static', filename='js/liveNotifications.js') }}"></script>
     {% block app_scripts %}
     {% endblock %}
 {% endblock %}
