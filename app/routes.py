@@ -8,6 +8,7 @@ from datetime import datetime
 from app.emails import send_password_reset_email
 from app.schema import MessageSchema
 from app.sockets import live_users
+import json
 
 @app.before_request
 def before_request():
@@ -258,13 +259,23 @@ def send_message_action(recipient):
         recipient = User.query.filter_by(username=recipient).first()
         msg = Message(content=form.content.data, sender=current_user, recipient=recipient)
         db.session.add(msg)
-        recipient.has_unseen_messages = True
         db.session.commit()
+        newMsg = Message.query.get(msg.id)
+        recipient.has_unseen_messages = True
         flash("Your message has been send")
+        message_schema = MessageSchema()
+        result = message_schema.dump(newMsg)
         if recipient.username in live_users:
             socketio.emit('new messages', {"msg": "You have a new message"}, room=live_users[recipient.username])
+            socketio.emit('notification_alert', result, room=live_users[recipient.username], callback=ack)
         return redirect(url_for('send_message', recipient=recipient.username))
 
+
+def ack(msg, data):
+    if msg == 'success':
+        message = Message.query.get(data)
+        message.check_seen()
+        db.session.commit()
 
 
 
