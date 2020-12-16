@@ -28,7 +28,6 @@ async function getNewNotifications(page){
         }
     })
     const data = await response.json()
-    console.log(data)
     return data
 }
 function createTable({content, sender, timestamp}){
@@ -39,7 +38,7 @@ function createTable({content, sender, timestamp}){
                         <span style="font-size:13px">From @${sender.username}</span><br>
                         ${content}
                     </td>
-                    <td class="text-right"style="font-size:13px; transform: translateY(15px)">${moment(timestamp).fromNow()}</td>
+                    <td class="text-right"style="font-size:13px; transform: translateY(15px)">${moment(new Date(timestamp)).fromNow()}</td>
                 </tr>`
     table.innerHTML=msg
     return table
