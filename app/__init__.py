@@ -10,6 +10,7 @@ from flask_mail import Mail
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_marshmallow import Marshmallow
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -21,9 +22,10 @@ mail = Mail(app)
 bootstrap = Bootstrap(app)
 moment = Moment(app)
 ma = Marshmallow(app)
+socketio = SocketIO(app)
 
 
-from app import routes, models, errors, schema
+from app import routes, models, errors, schema, sockets
 
 
 if not app.debug:

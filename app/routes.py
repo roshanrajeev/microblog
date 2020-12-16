@@ -1,5 +1,5 @@
 from flask import render_template, flash, redirect, url_for, request, jsonify
-from app import app, db
+from app import app, db, socketio
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm, SendMessageForm
 from app.models import User, Post, Message
 from flask_login import current_user, login_user, logout_user, login_required
@@ -7,6 +7,7 @@ from werkzeug.urls import url_parse
 from datetime import datetime
 from app.emails import send_password_reset_email
 from app.schema import MessageSchema
+from app.sockets import live_users
 
 @app.before_request
 def before_request():
@@ -260,4 +261,15 @@ def send_message_action(recipient):
         recipient.has_unseen_messages = True
         db.session.commit()
         flash("Your message has been send")
+        if recipient.username in live_users:
+            socketio.emit('new messages', {"msg": "You have a new message"}, room=live_users[recipient.username])
         return redirect(url_for('send_message', recipient=recipient.username))
+
+
+
+
+################
+################
+@app.route('/socket-template')
+def socket_template():
+    return render_template('sockets.html')
