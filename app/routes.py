@@ -220,6 +220,8 @@ def delete_post(post_id):
 @app.route('/notifications')
 @login_required
 def notification():
+    current_user.has_unseen_messages = False
+    db.session.commit()
     return render_template('notifications.html')
 
 @app.route('/load-notifications')
@@ -255,6 +257,7 @@ def send_message_action(recipient):
         recipient = User.query.filter_by(username=recipient).first()
         msg = Message(content=form.content.data, sender=current_user, recipient=recipient)
         db.session.add(msg)
+        recipient.has_unseen_messages = True
         db.session.commit()
         flash("Your message has been send")
         return redirect(url_for('send_message', recipient=recipient.username))

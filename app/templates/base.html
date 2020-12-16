@@ -34,7 +34,10 @@
                     <a href="{{ url_for('login') }}" class="nav-link">Login</a>
                 </li>
                 {% else %}
-                <li class="nav-item">
+                <li class="nav-item" style="position: relative;">
+                    {% if current_user.has_unseen_messages %}
+                    <span style="background-color: orange; position:absolute;top: 50%;transform: translate(0, -51%);left: -8px; width: 8px; height: 8px; border-radius: 50%; "></span>
+                    {% endif %}
                     <a href="{{ url_for('notification') }}" class="nav-link">Notifications</a>
                 </li>
                 <li class="nav-item">
