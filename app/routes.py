@@ -229,6 +229,12 @@ def load_notifications():
     messages = current_user.get_received_messages().paginate(page, app.config['MESSAGES_PER_PAGE'], False)
     message_schema = MessageSchema(many=True)
     result = message_schema.dump(messages.items)
+
+    for message in messages.items:
+        if not message.seen_time:
+            message.check_seen()
+        db.session.commit()
+
     return jsonify({"messages": result, "hasNext": messages.has_next})
 
 

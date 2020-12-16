@@ -28,18 +28,30 @@ async function getNewNotifications(page){
         }
     })
     const data = await response.json()
+    console.log(data)
     return data
 }
-function createTable({content, sender, timestamp}){
+function createTable({content, sender, timestamp, seen_time}){
     const table = document.createElement('table')
     table.className = 'notification-table table table-hover'
-    const msg = `<tr>
-                    <td>
-                        <span style="font-size:13px">From @${sender.username}</span><br>
-                        ${content}
-                    </td>
-                    <td class="text-right"style="font-size:13px; transform: translateY(15px)">${moment(new Date(timestamp)).fromNow()}</td>
-                </tr>`
+    let msg
+    if(!seen_time){
+        msg = `<tr>
+                        <td>
+                            <span style="font-size:13px; font-weight: 700;">From @${sender.username}</span><br>
+                            ${content}
+                        </td>
+                        <td class="text-right"style="font-size:13px;font-weight: 700; transform: translateY(15px)">${moment(new Date(timestamp)).fromNow()}</td>
+                    </tr>`
+    }else{
+        msg = `<tr>
+                        <td>
+                            <span style="font-size:13px;">From @${sender.username}</span><br>
+                            ${content}
+                        </td>
+                        <td class="text-right"style="font-size:13px; transform: translateY(15px)">${moment(new Date(timestamp)).fromNow()}</td>
+                    </tr>`
+    }
     table.innerHTML=msg
     return table
 }

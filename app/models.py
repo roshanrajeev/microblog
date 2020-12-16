@@ -6,6 +6,7 @@ from flask_login import UserMixin
 from hashlib import md5
 from time import time
 import jwt
+from sqlalchemy.sql import expression
 
 followers = db.Table('followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
@@ -30,7 +31,8 @@ class User(UserMixin, db.Model):
     posts=db.relationship("Post", backref="author", lazy="dynamic")
     about_me=db.Column(db.String(140))
     last_seen=db.Column(db.DateTime, default=datetime.utcnow)
-    location=db.Column(db.String(120))
+    location=db.Column(db.String(120), nullable=True)
+    has_unseen_messages=db.Column(db.Boolean, server_default=expression.false())
     
     followed=db.relationship('User', 
         secondary=followers, 
@@ -109,6 +111,9 @@ class Message(db.Model):
     recipient_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     seen_time = db.Column(db.DateTime)
+
+    def check_seen(self):
+        self.seen_time = datetime.utcnow()
 
 
 @login.user_loader
