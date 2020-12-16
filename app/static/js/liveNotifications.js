@@ -1,6 +1,5 @@
 window.addEventListener('DOMContentLoaded', () => {
     socket.on('new messages', function(msg) {
-        console.log('in main socket')
         handleNotification(msg)
     })
     

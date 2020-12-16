@@ -28,7 +28,6 @@ async function getNewNotifications(page){
         }
     })
     const data = await response.json()
-    console.log(data)
     return data
 }
 function createTable({content, sender, timestamp, seen_time}){
