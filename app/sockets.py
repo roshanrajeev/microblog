@@ -7,6 +7,7 @@ live_users = {}
 
 @socketio.on('connect')
 def add_user():
-    live_users[current_user.username] = request.sid
+    if current_user.is_authenticated:
+        live_users[current_user.username] = request.sid
 
         
