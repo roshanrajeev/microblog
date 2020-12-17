@@ -1,3 +1,4 @@
 2020-12-17 10:50:24,230 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
 2020-12-17 10:53:17,804 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
 2020-12-17 10:53:17,808 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 11:45:54,122 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
