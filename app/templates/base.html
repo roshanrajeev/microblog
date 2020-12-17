@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block styles %}
-    {{ super() }}
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='vendor/font-awesome/css/all.css') }}">
     {% block app_styles %}
     {% endblock %}
 {% endblock %}
