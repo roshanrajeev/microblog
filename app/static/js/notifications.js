@@ -31,6 +31,7 @@ async function getNewNotifications(page){
     return data
 }
 function createTable({content, sender, timestamp, seen_time}){
+    timestamp = timestamp.charAt(timestamp.length-1) != 'Z' ? timestamp+'Z' : timestamp
     const table = document.createElement('table')
     table.className = 'notification-table table table-hover'
     let msg

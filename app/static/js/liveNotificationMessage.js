@@ -22,6 +22,7 @@ window.addEventListener('DOMContentLoaded',() => {
         container.insertBefore(table, container.children[0])
     }
     function createTable({content, sender, timestamp}){
+        timestamp = timestamp.charAt(timestamp.length-1) != 'Z' ? timestamp+'Z' : timestamp
         const table = document.createElement('table')
         table.className = 'notification-table table table-hover'
         let message

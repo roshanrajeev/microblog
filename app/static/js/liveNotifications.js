@@ -19,15 +19,5 @@ window.addEventListener('DOMContentLoaded', () => {
             `
             item.insertBefore(span, item[0])
         }
-        // const alertContainer = document.querySelector('#notification-alert-container')
-    
-        // const div = document.createElement('div')
-        // div.appendChild(document.createTextNode(msg.msg))
-        // div.className='alert alert-info'
-        // div.style.cssText=`
-        //     position: sticky;
-        //     top: 10px;
-        // `
-        // alertContainer.insertBefore(div, alertContainer.children[0])
     }
 })
