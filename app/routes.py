@@ -259,9 +259,9 @@ def send_message_action(recipient):
         recipient = User.query.filter_by(username=recipient).first()
         msg = Message(content=form.content.data, sender=current_user, recipient=recipient)
         db.session.add(msg)
+        recipient.has_unseen_messages = 1
         db.session.commit()
         newMsg = Message.query.get(msg.id)
-        recipient.has_unseen_messages = 1
         flash("Your message has been send")
         message_schema = MessageSchema()
         result = message_schema.dump(newMsg)
@@ -275,6 +275,7 @@ def ack(msg, data):
     if msg == 'success':
         message = Message.query.get(data)
         message.check_seen()
+        message.recipient.has_unseen_messages=0
         db.session.commit()
 
 

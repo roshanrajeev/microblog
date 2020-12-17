@@ -1,6 +1,6 @@
 window.addEventListener('DOMContentLoaded',() => {
     socket.on('notification_alert', function(data, callback) {
-
+            
         callback("success", data.id)
         addAlert("You have a new message")
         addMessage(data)
