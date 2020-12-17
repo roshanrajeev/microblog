@@ -73,7 +73,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='js/scripts.js') }}">
     <script src="https://cdn.jsdelivr.net/npm/socket.io-client@3.0.1/dist/socket.io.min.js"></script>
     <script>
-        const socket = io.connect('http://localhost:5000')
+        const loc = window.location
+        const d = loc.protocol+ "//" +loc.hostname + ":" + loc.port
+        const socket = io.connect(d)
     </script>
     <script src="{{ url_for('static', filename='js/liveNotifications.js') }}"></script>
     {% block app_scripts %}
