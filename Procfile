@@ -1,1 +1,1 @@
-web: flask db upgrade; gunicorn --worker-class eventlet -w 1 microblog:app
+web: flask db upgrade; gunicorn -k gevent -w 1 microblog:app

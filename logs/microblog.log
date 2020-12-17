@@ -111,3 +111,4 @@ sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed
 2020-12-17 08:30:27,233 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
 2020-12-17 08:33:46,890 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
 2020-12-17 08:46:20,211 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
+2020-12-17 09:04:34,304 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
