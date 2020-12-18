@@ -1,8 +1,8 @@
-"""New Migrations
+"""empty message
 
-Revision ID: 5569170e097c
+Revision ID: 9b526f575de6
 Revises: 
-Create Date: 2020-12-17 11:44:35.128069
+Create Date: 2020-12-18 10:44:11.407505
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5569170e097c'
+revision = '9b526f575de6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,6 +27,7 @@ def upgrade():
     sa.Column('last_seen', sa.DateTime(), nullable=True),
     sa.Column('location', sa.String(length=120), nullable=True),
     sa.Column('has_unseen_messages', sa.Integer(), nullable=True),
+    sa.Column('has_admin_previlages', sa.Integer(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
     with op.batch_alter_table('user', schema=None) as batch_op:
