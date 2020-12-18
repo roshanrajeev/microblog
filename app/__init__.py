@@ -3,7 +3,7 @@ from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-from flask_login import LoginManager
+from flask_login import LoginManager, current_user, login_required
 import logging
 from logging.handlers import RotatingFileHandler, SMTPHandler
 from flask_mail import Mail
@@ -11,6 +11,8 @@ from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from flask_marshmallow import Marshmallow
 from flask_socketio import SocketIO
+import getpass
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -25,7 +27,7 @@ ma = Marshmallow(app)
 socketio = SocketIO(app)
 
 
-from app import routes, models, errors, schema, sockets
+from app import routes, models, errors, schema, sockets, commands, manager
 
 
 if not app.debug:

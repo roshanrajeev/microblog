@@ -45,6 +45,8 @@ class User(UserMixin, db.Model):
     send_messages = db.relationship('Message', backref='sender', lazy=True, foreign_keys='Message.sender_id')
     received_messages = db.relationship('Message', backref='recipient', lazy=True, foreign_keys='Message.recipient_id')
 
+    has_admin_previlages = db.Column(db.Integer, default=0)
+
     def get_received_messages(self):
         return Message.query.join(
                 User, (User.id == Message.recipient_id)).filter(

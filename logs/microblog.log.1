@@ -1,117 +1,63 @@
-2020-12-02 08:53:32,919 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:28]
-2020-12-02 08:53:46,971 ERROR: Exception on /edit_profile [POST] [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask/app.py:1891]
-Traceback (most recent call last):
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
-    self.dialect.do_execute(
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 593, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.IntegrityError: UNIQUE constraint failed: user.username
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask/app.py", line 2447, in wsgi_app
-    response = self.full_dispatch_request()
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask/app.py", line 1952, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask/app.py", line 1821, in handle_user_exception
-    reraise(exc_type, exc_value, tb)
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask/_compat.py", line 39, in reraise
-    raise value
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask/app.py", line 1950, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask/app.py", line 1936, in dispatch_request
-    return self.view_functions[rule.endpoint](**req.view_args)
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_login/utils.py", line 272, in decorated_view
-    return func(*args, **kwargs)
-  File "/home/roshan/SANDBOX/microblog/app/routes.py", line 92, in edit_profile
-    db.session.commit()
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/scoping.py", line 163, in do
-    return getattr(self.registry(), name)(*args, **kwargs)
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 1042, in commit
-    self.transaction.commit()
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 504, in commit
-    self._prepare_impl()
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 483, in _prepare_impl
-    self.session.flush()
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2536, in flush
-    self._flush(objects)
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2678, in _flush
-    transaction.rollback(_capture_exception=True)
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/util/langhelpers.py", line 68, in __exit__
-    compat.raise_(
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
-    raise exception
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/session.py", line 2638, in _flush
-    flush_context.execute()
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 422, in execute
-    rec.execute(self)
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/unitofwork.py", line 586, in execute
-    persistence.save_obj(
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 230, in save_obj
-    _emit_update_statements(
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/orm/persistence.py", line 994, in _emit_update_statements
-    c = cached_connections[connection].execute(
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1011, in execute
-    return meth(self, multiparams, params)
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/sql/elements.py", line 298, in _execute_on_connection
-    return connection._execute_clauseelement(self, multiparams, params)
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1124, in _execute_clauseelement
-    ret = self._execute_context(
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1316, in _execute_context
-    self._handle_dbapi_exception(
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1510, in _handle_dbapi_exception
-    util.raise_(
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 182, in raise_
-    raise exception
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1276, in _execute_context
-    self.dialect.do_execute(
-  File "/home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 593, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.IntegrityError: (sqlite3.IntegrityError) UNIQUE constraint failed: user.username
-[SQL: UPDATE user SET username=?, about_me=? WHERE user.id = ?]
-[parameters: ('roshan27', 'My Bio', 4)]
-(Background on this error at: http://sqlalche.me/e/13/gkpj)
-2020-12-09 16:56:18,072 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:28]
-2020-12-10 15:36:18,510 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:28]
-2020-12-10 15:37:31,147 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:28]
-2020-12-10 22:13:46,627 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:30]
-2020-12-11 08:30:49,247 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:30]
-2020-12-13 11:32:01,108 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:34]
-2020-12-14 13:36:03,958 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:34]
-2020-12-14 23:14:42,616 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:34]
-2020-12-14 23:33:02,787 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:34]
-2020-12-14 23:41:18,740 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:34]
-2020-12-14 23:42:37,639 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:34]
-2020-12-15 12:14:55,396 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:34]
-2020-12-15 18:15:54,013 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:37]
-2020-12-15 19:44:59,816 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:37]
-2020-12-15 19:49:17,608 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:37]
-2020-12-16 12:00:44,191 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 12:01:41,433 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 12:02:53,229 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 12:36:33,060 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 12:40:24,936 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 12:40:46,323 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 12:41:03,615 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 13:04:39,437 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 13:44:29,583 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 14:56:26,494 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 16:31:36,859 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 16:53:19,121 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 17:07:37,491 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 22:23:28,325 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 22:23:42,406 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 22:28:09,792 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 23:04:44,349 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 23:05:30,202 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-16 23:27:34,687 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-17 07:46:08,813 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-17 08:20:41,279 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-17 08:30:27,233 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-17 08:33:46,890 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-17 08:46:20,211 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-17 09:04:34,304 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-17 10:50:23,705 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
-2020-12-17 10:50:23,708 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
-2020-12-17 10:50:24,226 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:39]
+2020-12-17 22:21:57,319 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 22:25:17,801 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:41]
+2020-12-17 22:25:17,805 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 22:47:00,163 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:41]
+2020-12-17 22:47:00,167 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 22:48:42,954 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:41]
+2020-12-17 22:48:42,958 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 22:49:04,056 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:41]
+2020-12-17 22:49:04,060 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 22:49:13,965 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:41]
+2020-12-17 22:49:13,969 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 22:50:40,321 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:41]
+2020-12-17 22:50:40,325 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 22:51:00,429 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:41]
+2020-12-17 22:51:00,434 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 22:57:25,404 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:41]
+2020-12-17 22:57:25,409 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 23:01:12,090 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:41]
+2020-12-17 23:01:12,094 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 23:03:41,110 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:45]
+2020-12-17 23:03:41,115 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 23:05:40,586 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:47]
+2020-12-17 23:05:40,590 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 23:05:41,195 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:47]
+2020-12-17 23:05:41,200 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 23:39:16,291 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:42]
+2020-12-17 23:39:16,310 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 23:39:17,124 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:42]
+2020-12-17 23:39:17,129 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 23:48:27,892 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:48]
+2020-12-17 23:48:27,896 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 23:49:12,382 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:49]
+2020-12-17 23:49:12,386 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-17 23:51:26,489 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:49]
+2020-12-17 23:51:26,494 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 00:07:23,172 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:49]
+2020-12-18 00:17:55,693 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 00:17:55,696 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 00:17:56,216 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 00:17:56,220 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 00:18:23,353 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:52]
+2020-12-18 00:18:23,356 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 00:18:58,624 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:52]
+2020-12-18 00:18:58,629 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 00:20:35,354 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:52]
+2020-12-18 00:20:35,358 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 00:29:53,188 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 00:29:53,191 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 00:29:53,704 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 00:29:53,708 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 08:50:11,047 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 08:50:11,062 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 08:50:11,736 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 08:50:11,869 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 08:54:16,127 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 08:54:16,131 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 08:59:12,607 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 08:59:12,610 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 08:59:13,103 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 08:59:13,107 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 09:02:03,456 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
+2020-12-18 09:02:03,459 WARNING: WebSocket transport not available. Install gevent-websocket for improved performance. [in /home/roshan/SANDBOX/microblog/env/lib/python3.8/site-packages/flask_socketio/__init__.py:628]
+2020-12-18 09:02:45,126 INFO: Microblog startup [in /home/roshan/SANDBOX/microblog/app/__init__.py:51]
