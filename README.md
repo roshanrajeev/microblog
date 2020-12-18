@@ -10,7 +10,7 @@
   
  ## About The Project
 
-Microblog is a web application created using Flask and Jinja2 templates.Demo version of this application is deployed on Heroku and is available at [roshan-flask-microblog.herokuapp.com](https://roshan-flask-microblog.herokuapp.com/). Posts are publicly visible to all registered users and can follow other users to see their post in their home page.
+Microblog is a web application created using Flask and Jinja2 templates.Demo version of this application is deployed on Heroku and is available at [roshan-microblog.herokuapp.com](https://roshan-microblog.herokuapp.com/). Posts are publicly visible to all registered users and can follow other users to see their post in their home page.
 
 Database defaults to sqlite if no specific database is configured. Database is managed using Flask-SQLAlchemy ORM and migrations are created using Flask-Migrate. Live notifications are enabled making use of Flask-SocketIO. 
 
@@ -18,7 +18,7 @@ Database defaults to sqlite if no specific database is configured. Database is m
  
  Some of the features of the application includes
 
-- Public Posting
+- Public Posts
 - Private Messaging
 - Live Notifications
 
