@@ -3,7 +3,7 @@
     <p align="center">
       Hear what people have to say
       <br>
-      <a href="https://roshan-flask-microblog.herokuapp.com/">View App</a>
+      <a href="https://roshan-microblog.herokuapp.com/">View App</a>
     </p>
   </p>
   
